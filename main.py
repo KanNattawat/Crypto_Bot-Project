@@ -14,7 +14,7 @@ client = Client(api_key, api_secret)
 
 
 
-def main():
+def searchforgraph():
     client = Client(API_KEY, SECRET_KEY)
     ROOT = Tk()
     ROOT.withdraw()
@@ -87,7 +87,7 @@ Tab.add(T1, text='Market', compound='left')
 Tab.add(T2, text='Bot', compound='left')
 ttk.Label(T2, text='Hello')
 ################################### GRAPH TAB ##################################
-B2 = Button(T2, text='Search', command=main, height=5, width=15)
+B2 = Button(T2, text='Search', command=searchforgraph, height=5, width=15)
 B2.place(relx=0.5, rely=0.4)
 L2 = ttk.Label(T2, text='crypto currency list \n following list')
 L2.place(x=50, y=50)
