@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import talib
 import numpy as np
 from tkinter import *
-from tkinter import simpledialog, ttk
+from tkinter import ttk
 
 api_key = "Hgl2ZQwY8mYVQ7Z9xVOd5p30PfgsKo0kiY7CxNmGoA98lotG7JBrdetgY1bDQRze" #ใส่ API KEY
 api_secret = "6dRPwHLJcYOXYDzLag72eXDU6ayMAT5S1bKPtELv4Eu2dQZw4s5jLAKueYwkuxAy"
@@ -12,11 +12,12 @@ SECRET_KEY = 'GMdE32SEbwCGMzbBRAuefQGDDGFlYfapYiPF6BS7NZoca4ODLuaaRDA6AL8DZhmK'
 
 client = Client(api_key, api_secret)
 
-def main():
+def main(event=None):
     cilent = Client(API_KEY, SECRET_KEY)
-    ROOT = Tk()
-    ROOT.withdraw()
-    USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
+    # ROOT = Tk()
+    # ROOT.withdraw()
+    # USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
+    USER_INP = e_coin.get()
 
 
     def signal_by_symbols(symbols):
@@ -65,7 +66,7 @@ def main():
         plt.legend(loc="upper left")
         plt.show()
 
-    signal_by_symbols(USER_INP.upper() + 'USDT')
+    signal_by_symbols(USER_INP.upper())
 
 GUI = Tk()
 GUI.geometry('700x500')
@@ -84,29 +85,36 @@ Tab.pack(fill=BOTH, expand=1)
 Tab.add(T1, text='Market', compound='left')
 Tab.add(T2, text='Bot', compound='left')
 ttk.Label(T2, text='Hello')
-B2 = Button(T2, text='Search', command=main, height=10, width=20)
-B2.place(relx=0.5, rely=0.4)
 
 # Tab.add(T3, text='Buy', compound='left')
 # Tab.add(T4, text='Balance', compound='left')
 ################################### MARKET TAB ##################################
 F1 = ttk.Labelframe(T1, text='Market Price')
 F1.place(x=50, y=50)
-
+################################### Bot TAB ##################################
+F2 = ttk.Labelframe(T2, text='Crypto BOT Processing')
+F2.place(x=50, y=50)
 # LABEL
 L1 = ttk.Label(F1,text='Coin', font=FONT1)
 L1.grid(row=0, column=0,padx=20)
+L2 = ttk.Label(F2, text='Coin', font=FONT1)
+L2.grid(row=0, column=0,padx=20)
 
 # ENTRY COIN
 v_coin = StringVar()
 v_coin.set('BTCUSDT')
+e_coin = StringVar()
+e_coin.set('BTCUSDT')
 E1 = ttk.Entry(F1, textvariable=v_coin, font=FONT1, width=15)
 E1.grid(row=0, column=1, padx=20)
+E2 = ttk.Entry(F2, textvariable=e_coin, font=FONT1, width=15)
+E2.grid(row=0, column=1, padx=20)
 
 # CHECK PRICE FUNCTION
 def CheckPrice(event=None):
     global autostate
     symbol = v_coin.get()
+    print(type(symbol))
     try:
         tickers = client.get_ticker(symbol=symbol)
         lastprice = float(tickers['lastPrice'])
@@ -126,8 +134,10 @@ def CheckPrice(event=None):
         Result.after(500, CheckPrice)
 
 # BUTTON 
-B1 = ttk.Button(F1,text='Check Price', command=CheckPrice)
+B1 = ttk.Button(F1, text='Check Price', command=CheckPrice)
 B1.grid(row=1, column=1, padx=20, pady=10, ipady=10, ipadx=120)
+B2 = ttk.Button(F2, text='Enter', command=main)
+B2.grid(row=1, column=1, padx=20, pady=10, ipady=10, ipadx=120)
 
 # ENTER
 E1.bind('<Return>', CheckPrice)
