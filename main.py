@@ -88,6 +88,11 @@ ttk.Label(T2, text='Hello')
 
 # Tab.add(T3, text='Buy', compound='left')
 # Tab.add(T4, text='Balance', compound='left')
+################################### GRAPH TAB ##################################
+B2 = Button(T2, text='Search', command=main, height=5, width=15)
+B2.place(relx=0.5, rely=0.4)
+L2 = ttk.Label(T2, text='crypto currency list \n following list')
+L2.place(x=50, y=50)
 ################################### MARKET TAB ##################################
 F1 = ttk.Labelframe(T1, text='Market Price')
 F1.place(x=50, y=50)
