@@ -2,13 +2,20 @@ from binance import Client
 import matplotlib.pyplot as plt
 import talib
 import numpy as np
+from tkinter import *
+from tkinter import simpledialog
 
 api_key = "Hgl2ZQwY8mYVQ7Z9xVOd5p30PfgsKo0kiY7CxNmGoA98lotG7JBrdetgY1bDQRze"
 api_secret = "6dRPwHLJcYOXYDzLag72eXDU6ayMAT5S1bKPtELv4Eu2dQZw4s5jLAKueYwkuxAy"
 
 client = Client(api_key, api_secret)
 
-#symbols = "BTCUSDT"
+# The input dialog
+ROOT = Tk()
+ROOT.withdraw()
+USER_INP = simpledialog.askstring(title="Test", prompt="What's your coin?")
+
+
 def signal_by_symbols(symbols):
     klines = client.get_historical_klines(symbols, Client.KLINE_INTERVAL_1MINUTE, "100 minutes ago UTC")
 
@@ -51,9 +58,8 @@ def signal_by_symbols(symbols):
 
     plt.plot(crossover, "x", color="green", label="BULLISH")
     plt.plot(crossunder, "x", color="red", label="BEARISH")
-
+    plt.title(USER_INP + '  Price')
     plt.legend(loc="upper left")
     plt.show()
 
-signal_by_symbols("ETHUSDT")
-# heyyyyyyyyyy
+signal_by_symbols(USER_INP + 'USDT')
