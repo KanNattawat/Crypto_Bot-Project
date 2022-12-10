@@ -58,7 +58,7 @@ def signal_by_symbols(symbols):
 
     plt.plot(crossover, "x", color="green", label="BULLISH")
     plt.plot(crossunder, "x", color="red", label="BEARISH")
-    plt.title(USER_INP + '  Price')
+    plt.title(USER_INP.upper() + 'USDT  Price')
     plt.legend(loc="upper left")
     plt.show()
 
