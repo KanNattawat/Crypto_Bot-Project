@@ -62,4 +62,4 @@ def signal_by_symbols(symbols):
     plt.legend(loc="upper left")
     plt.show()
 
-signal_by_symbols(USER_INP + 'USDT')
+signal_by_symbols(USER_INP.upper() + 'USDT')
