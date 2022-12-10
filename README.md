@@ -10,4 +10,5 @@ INPUT
 
 OUTPUT
 การส่งจุดเข้า จุดออก ที่มีความเป็นไปได้ในการ take profits ในเหรียญที่สนใจหลังจากการคำนวณจากกราฟและ indicator มาแล้ว
+
 Report link https://docs.google.com/document/d/1B3pibfwPUMLez0TJLvChxvaWF_shjppDOfb2uXKVYgs/edit?usp=sharing
