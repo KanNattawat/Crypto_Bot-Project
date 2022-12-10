@@ -66,7 +66,7 @@ def CheckPrice(event=None):
 
 # BUTTON 
 B1 = Button(F1,text='Check Price', command=CheckPrice, bg="green")
-B1.grid(row=1, column=1, padx=20, pady=10, ipady=10, ipadx=120)
+B1.grid(row=1, column=1, padx=20, pady=10, ipady=8, ipadx=115)
 
 # ENTER
 E1.bind('<Return>', CheckPrice)
