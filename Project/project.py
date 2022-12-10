@@ -56,3 +56,4 @@ def signal_by_symbols(symbols):
     plt.show()
 
 signal_by_symbols("ETHUSDT")
+# heyyyyyyyyyy
