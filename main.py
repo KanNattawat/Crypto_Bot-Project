@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import talib
 import numpy as np
 from tkinter import *
-from tkinter import ttk
+from tkinter import simpledialog, ttk
 
 api_key = "Hgl2ZQwY8mYVQ7Z9xVOd5p30PfgsKo0kiY7CxNmGoA98lotG7JBrdetgY1bDQRze" #ใส่ API KEY
 api_secret = "6dRPwHLJcYOXYDzLag72eXDU6ayMAT5S1bKPtELv4Eu2dQZw4s5jLAKueYwkuxAy"
@@ -12,12 +12,13 @@ SECRET_KEY = 'GMdE32SEbwCGMzbBRAuefQGDDGFlYfapYiPF6BS7NZoca4ODLuaaRDA6AL8DZhmK'
 
 client = Client(api_key, api_secret)
 
-def main(event=None):
-    cilent = Client(API_KEY, SECRET_KEY)
-    # ROOT = Tk()
-    # ROOT.withdraw()
-    # USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
-    USER_INP = e_coin.get().upper()
+
+
+def main():
+    client = Client(API_KEY, SECRET_KEY)
+    ROOT = Tk()
+    ROOT.withdraw()
+    USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
 
 
     def signal_by_symbols(symbols):
@@ -62,11 +63,11 @@ def main(event=None):
 
         plt.plot(crossover, "x", color="green", label="BULLISH")
         plt.plot(crossunder, "x", color="red", label="BEARISH")
-        plt.title(USER_INP.upper() + '  Price')
+        plt.title(USER_INP.upper() + 'USDT  Price')
         plt.legend(loc="upper left")
         plt.show()
 
-    signal_by_symbols(USER_INP.upper())
+    signal_by_symbols(USER_INP.upper() + 'USDT')
 
 GUI = Tk()
 GUI.geometry('700x500')
@@ -85,41 +86,31 @@ Tab.pack(fill=BOTH, expand=1)
 Tab.add(T1, text='Market', compound='left')
 Tab.add(T2, text='Bot', compound='left')
 ttk.Label(T2, text='Hello')
-
-# Tab.add(T3, text='Buy', compound='left')
-# Tab.add(T4, text='Balance', compound='left')
 ################################### GRAPH TAB ##################################
 B2 = Button(T2, text='Search', command=main, height=5, width=15)
 B2.place(relx=0.5, rely=0.4)
 L2 = ttk.Label(T2, text='crypto currency list \n following list')
 L2.place(x=50, y=50)
+# Tab.add(T3, text='Buy', compound='left')
+# Tab.add(T4, text='Balance', compound='left')
 ################################### MARKET TAB ##################################
 F1 = ttk.Labelframe(T1, text='Market Price')
 F1.place(x=50, y=50)
-################################### Bot TAB ##################################
-F2 = ttk.Labelframe(T2, text='Crypto BOT Processing')
-F2.place(x=50, y=50)
-# LABEL
+
+# LABEL1
 L1 = ttk.Label(F1,text='Coin', font=FONT1)
 L1.grid(row=0, column=0,padx=20)
-L2 = ttk.Label(F2, text='Coin', font=FONT1)
-L2.grid(row=0, column=0,padx=20)
 
 # ENTRY COIN
 v_coin = StringVar()
 v_coin.set('BTCUSDT')
-e_coin = StringVar()
-e_coin.set('BTCUSDT')
 E1 = ttk.Entry(F1, textvariable=v_coin, font=FONT1, width=15)
 E1.grid(row=0, column=1, padx=20)
-E2 = ttk.Entry(F2, textvariable=e_coin, font=FONT1, width=15)
-E2.grid(row=0, column=1, padx=20)
 
 # CHECK PRICE FUNCTION
 def CheckPrice(event=None):
     global autostate
     symbol = v_coin.get()
-    print(type(symbol))
     try:
         tickers = client.get_ticker(symbol=symbol)
         lastprice = float(tickers['lastPrice'])
@@ -139,21 +130,19 @@ def CheckPrice(event=None):
         Result.after(500, CheckPrice)
 
 # BUTTON 
-B1 = ttk.Button(F1, text='Check Price', command=CheckPrice)
+B1 = ttk.Button(F1,text='Check Price', command=CheckPrice)
 B1.grid(row=1, column=1, padx=20, pady=10, ipady=10, ipadx=120)
-B2 = ttk.Button(F2, text='Enter', command=main)
-B2.grid(row=1, column=1, padx=20, pady=10, ipady=10, ipadx=120)
 
 # ENTER
 E1.bind('<Return>', CheckPrice)
 
 # FRAME 2 
-F2 = Frame(T1)
-F2.place(x=50, y=200)
+Subframe1 = Frame(T1)
+Subframe1.place(x=50, y=200)
 
 # PRICE RESULT
 v_result = StringVar()
-Result = ttk.Label(F2, textvariable = v_result, font=FONT1)
+Result = ttk.Label(Subframe1, textvariable = v_result, font=FONT1)
 Result.pack()
 
 # MODE
@@ -178,29 +167,3 @@ Status.place(x=20, y=450)
 
 
 GUI.mainloop()
-
-
-################################### SELL TAB ##################################
-
-# v_sell_coin = StringVar()
-# v_sell_coin.set('BTCUSDT')
-# ET21 = ttk.Entry(T2, textvariable=v_sell_coin, font=FONT1, width=15)
-# ET21.pack(pady=10)
-
-# v_sell_amount = StringVar()
-# v_sell_amount.set('1')
-# ET22 = ttk.Entry(T2, textvariable=v_sell_amount, font=FONT1, width=15)
-# ET22.pack(pady=10)
-
-# v_sell_price = StringVar()
-# v_sell_price.set('54321')
-# ET23 = ttk.Entry(T2, textvariable=v_sell_price, font=FONT1, width=15)
-# ET23.pack(pady=10)
-
-# BSell = ttk.Button(T2, text='Sell')
-# BSell.pack(pady=50, ipadx=20, ipady=10)
-
-
-# client = Client(api_key, api_secret)
-
-# The input dialog
