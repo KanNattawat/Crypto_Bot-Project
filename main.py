@@ -17,7 +17,7 @@ def main(event=None):
     # ROOT = Tk()
     # ROOT.withdraw()
     # USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
-    USER_INP = e_coin.get()
+    USER_INP = e_coin.get().upper()
 
 
     def signal_by_symbols(symbols):
@@ -62,7 +62,7 @@ def main(event=None):
 
         plt.plot(crossover, "x", color="green", label="BULLISH")
         plt.plot(crossunder, "x", color="red", label="BEARISH")
-        plt.title(USER_INP.upper() + 'USDT  Price')
+        plt.title(USER_INP.upper() + '  Price')
         plt.legend(loc="upper left")
         plt.show()
 
