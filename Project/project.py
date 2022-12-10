@@ -13,7 +13,7 @@ client = Client(api_key, api_secret)
 # The input dialog
 ROOT = Tk()
 ROOT.withdraw()
-USER_INP = simpledialog.askstring(title="Test", prompt="What's your coin?")
+USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
 
 
 def signal_by_symbols(symbols):
