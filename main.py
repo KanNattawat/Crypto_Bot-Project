@@ -16,9 +16,7 @@ def searchforgraph(event=None):
     # ROOT = Tk()
     # ROOT.withdraw()
     # USER_INP = simpledialog.askstring(title="Test", prompt="What's your USDT coin?")
-    USER_INP = e_coin.get()
     USER_INP = e_coin.get().upper()
-
 
     def signal_by_symbols(symbols):
         klines = client.get_historical_klines(symbols, Client.KLINE_INTERVAL_1MINUTE, "100 minutes ago UTC")
@@ -84,7 +82,7 @@ L2.place(x=50, y=50)
 ################################### MARKET TAB ##################################
 F1 = ttk.Labelframe(T1, text='Market Price')
 F1.place(x=50, y=50)
-################################### Bot TAB ##################################
+################################### Bot TAB #####################################
 F2 = ttk.Labelframe(T2, text='Crypto BOT Processing')
 F2.place(x=50, y=50)
 # LABEL
