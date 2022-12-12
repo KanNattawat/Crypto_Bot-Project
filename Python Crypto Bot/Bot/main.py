@@ -17,7 +17,7 @@ client = Client(api_key, api_secret)
 def main(event=None):
 
     # Crypto Bot Client
-    cilent = Client(API_KEY, SECRET_KEY)
+    client = Client(API_KEY, SECRET_KEY)
 
     # INPUT
     USER_INP = e_coin.get().upper()
