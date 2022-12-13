@@ -26,22 +26,16 @@ def place_buy(amount, symbol):
     print("BUY COMPLETE")
 
 def place_sell(symbol):
-    n=3
+    info = client.get_symbol_info(symbol=symbol)
+    min_qty = float(info['filters'][1]['minQty'])
     trades = client.get_my_trades(symbol=symbol)
-    
-    while True:
-        try:
-            qty = float(trades[0]["qty"]) - float(trades[0]["commission"])
-            qty = str(qty)[:n]
-            client.order_market_sell(
-            symbol=symbol,
-            quantity=str(qty))
-            print("SELL COMPLETE")
-            return  
-
-        except:
-            n = n-1
-            pass
+    qty = float(trades[-1]["qty"]) - float(trades[-1]["commission"])
+    if qty > min_qty:
+        client.order_market_sell(
+                symbol=symbol,
+                quantity=str(qty))
+        print("SELL COMPLETE")
+    print("NOT ENOUGHT MINIMUM PLACE ORDER")
 
 autostate = False
 def signal_by_symbols():
@@ -59,9 +53,9 @@ def signal_by_symbols():
 
     price = closes[-1]
     usd = int(input_coin.get())
-    print(usd)
 
-    amount = float(usd/price)
+    amount = str(float(usd/price))[:-14]
+    amount = float(amount)
     # print(amount)
 
     if autostate == True:
@@ -77,7 +71,7 @@ def signal_by_symbols():
 
     else:
         text = 'Waiting for Signal'
-    print(amount, text)
+    print(bullish, bearish, text)
     v_result.set(text)
     check_text(text)
 
@@ -99,9 +93,6 @@ def check_text(text):
     info.set(balance['free'])
     print(sell_count, buy_count, none_count)
 
-# if __name__ == '__main__':
-#     r = signal_by_symbols('BTCUSDT')
-#     print(r)
 
 GUI = Tk()
 GUI.geometry('700x550')
@@ -110,7 +101,7 @@ t_image = PhotoImage(file='iconimage.png')
 GUI.iconphoto(False, t_image)
 FONT1 = ("Times", 30)
 
-F1 = ttk.Labelframe(text='Buy & Sell\nDescription :\nThis application will allow you to automatically buy & sell bitcoin')
+F1 = ttk.Labelframe(text='Buy & Sell\nDescription :\nThis tab will allow you to automatically buy & sell bitcoin')
 F1.place(x=50, y=50)
 F2 = ttk.Labelframe(text='Result')
 F2.place(x=50, y=320)
@@ -120,7 +111,7 @@ F3_sell = ttk.Labelframe(text='SELL TOTAL')
 F3_sell.place(x=150, y=410)
 F3_none = ttk.Labelframe(text='Wait for Signal')
 F3_none.place(x=250, y=410)
-F4_input = ttk.Labelframe(text='Input USDT (At least 10 USDT)')
+F4_input = ttk.Labelframe(text='Input USDT (More than 10 USDT)')
 F4_input.place(x=50, y=235)
 F5_pocket = ttk.Labelframe(text='Your USDT balance')
 F5_pocket.place(x=290, y=235)
@@ -181,5 +172,4 @@ v_status.set('Status: (Manual) [F1] Change to Auto')
 Status = ttk.Label(textvariable=v_status)
 Status.place(x=20, y=525)
 
-#พักก่อนจร้า
 GUI.mainloop()
