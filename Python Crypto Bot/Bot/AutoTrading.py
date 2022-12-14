@@ -1,15 +1,12 @@
 from binance import Client
-import matplotlib.pyplot as plt
 import talib
 import numpy as np
 from binance.enums import *
-import math
 from tkinter import *
 from tkinter import ttk
-from pprint import pprint
 
-api_key = "Hgl2ZQwY8mYVQ7Z9xVOd5p30PfgsKo0kiY7CxNmGoA98lotG7JBrdetgY1bDQRze"
-api_secret = "6dRPwHLJcYOXYDzLag72eXDU6ayMAT5S1bKPtELv4Eu2dQZw4s5jLAKueYwkuxAy"
+api_key = "" # Enter API Key
+api_secret = "" # Enter API Secret
 
 client = Client(api_key, api_secret)
 
@@ -18,7 +15,7 @@ def place_buy(amount, symbol):
     close = candles[0][4]
     minimum = float(close)*float(amount)
     print(minimum)
-    if  minimum < 10:
+    if minimum < 10:
         return print("NOT ENOUGHT MINIMUM PLACE ORDER")
     client.order_market_buy(
         symbol=symbol,
@@ -52,10 +49,10 @@ def signal_by_symbols():
     bearish = (ema12[-2] > ema26[-2]) and (ema12[-1] < ema26[-1]) #bearish cross
 
     price = closes[-1]
-    usd = int(input_coin.get())
+    usd = float(input_coin.get())
 
-    amount = str(float(usd/price))[:-14]
-    amount = float(amount)
+    amount = float(usd/price)
+    amount = round(amount, 5)
     # print(amount)
 
     if autostate == True:
