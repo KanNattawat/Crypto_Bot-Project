@@ -103,7 +103,7 @@ b2_pic.place(x=0, y=-50)
 Tab.pack(fill=BOTH, expand=1)
 
 Tab.add(T1, text='Market', compound='left')
-Tab.add(T2, text='Bot', compound='left')
+Tab.add(T2, text='Graph', compound='left')
 Tab.add(T3, text="BTC changed", compound='left')
 ttk.Label(T2, text='Hello')
 
